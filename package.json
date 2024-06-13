@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendar-range-selector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React Native component for selecting date ranges in a calendar view.",
   "main": "index.ts",
   "scripts": {

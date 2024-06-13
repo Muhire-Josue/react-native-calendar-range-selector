@@ -29,33 +29,41 @@ Here is a simple example of how to use the react-native-calendar-range-selector
 
 ```ts
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import moment, { Moment } from 'moment';
+import { View, StyleSheet, Button } from 'react-native';
+import { type Moment } from 'moment';
 import { CalendarRangeSelector } from 'react-native-calendar-range-selector';
 
-const App = () => {
+const App = (): React.ReactNode => {
   const [startDate, setStartDate] = useState<Moment | null>(null);
   const [endDate, setEndDate] = useState<Moment | null>(null);
+  const [showCalendar, setShowCalendar] = useState<boolean>(false);
 
-  const handleResetSelectedDays = () => {
+  const handleResetSelectedDays = (): void => {
     setStartDate(null);
     setEndDate(null);
   };
 
-  const handleShowCalendar = (value: boolean) => {
-    // Logic to show or hide the calendar
+  const handleShowCalendar = (value: boolean): void => {
+    setShowCalendar(value);
+  };
+
+  const handleOnPress = (): void => {
+    handleShowCalendar(true);
   };
 
   return (
-    <View>
-      <CalendarRangeSelector
-        startDate={startDate}
-        endDate={endDate}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-        handleResetSelectedDays={handleResetSelectedDays}
-        handleShowCalendar={handleShowCalendar}
-      />
+    <View style={styles.container}>
+      <Button title="Show Calendar" onPress={handleOnPress} />
+      {showCalendar && (
+        <CalendarRangeSelector
+          startDate={startDate}
+          endDate={endDate}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          handleResetSelectedDays={handleResetSelectedDays}
+          handleShowCalendar={handleShowCalendar}
+        />
+      )}
     </View>
   );
 };

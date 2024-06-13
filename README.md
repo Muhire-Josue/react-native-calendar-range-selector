@@ -29,7 +29,7 @@ Here is a simple example of how to use the react-native-calendar-range-selector
 
 ```ts
 import React, { useState } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, Button } from 'react-native';
 import { type Moment } from 'moment';
 import { CalendarRangeSelector } from 'react-native-calendar-range-selector';
 
@@ -52,7 +52,7 @@ const App = (): React.ReactNode => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       <Button title="Show Calendar" onPress={handleOnPress} />
       {showCalendar && (
         <CalendarRangeSelector
@@ -69,6 +69,7 @@ const App = (): React.ReactNode => {
 };
 
 export default App;
+
 
 ```
 

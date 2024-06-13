@@ -14,7 +14,7 @@
 
 ## Installation
 
-To install the library, run the following command using npm:
+To install the library, run the following command using npm or yarn:
 
 ```bash
 npm install react-native-calendar-range-selector

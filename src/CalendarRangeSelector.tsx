@@ -20,7 +20,6 @@ const CalendarRangeSelector: React.FC<handleResetSelectedDays> = ({
   setStartDate,
   setEndDate,
   handleShowCalendar
-
 }) => {
   const [currentDate, setCurrentDate] = useState<Moment>(moment());
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -68,87 +67,85 @@ const CalendarRangeSelector: React.FC<handleResetSelectedDays> = ({
   };
 
   const getMonths = (): string[] => {
-    return currentDate.year() === moment().year()
-      ? moment.months().slice(0, moment().month() + 1)
-      : moment.months();
+    return moment.months();
   };
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={() => { setDropdownVisible(true); }} style={styles.monthSelectorButton}>
-        <Text style={styles.monthSelectorText}>Select Date: {currentDate.format('MMMM YYYY')}</Text>
-        <Icon name="arrow-drop-down" size={24} color="black" />
-      </TouchableOpacity>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={dropdownVisible}
-        onRequestClose={() => { setDropdownVisible(false); }}
-      >
-        <View style={styles.modalView}>
-          <ScrollView style={styles.dropdown}>
-            {isSelectingYear
-              ? (
-              <>
-                <Text style={styles.dropdownLabel}>Select Year</Text>
-                {Array.from({ length: 10 }, (_, i) => moment().year() - i).map((year, index) => (
-                  <TouchableOpacity key={index} style={styles.dropdownItem} onPress={() => { onYearSelect(year); }}>
-                    <Text>{year}</Text>
-                  </TouchableOpacity>
-                ))}
-              </>
-                )
-              : (
-              <>
-                <Text style={styles.dropdownLabel}>Select Month</Text>
-                {getMonths().map((month, index) => (
-                  <TouchableOpacity key={index} style={styles.dropdownItem} onPress={() => { onMonthSelect(index); }}>
-                    <Text>{month}</Text>
-                  </TouchableOpacity>
-                ))}
-              </>
-                )}
-          </ScrollView>
-          <TouchableOpacity style={styles.closeButton} onPress={() => { setDropdownVisible(false); }}>
-            <Text style={styles.closeButtonText}>CLOSE</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      <View style={styles.weekdays}>
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-          <Text key={day} style={[styles.weekday, { color: '#7BB2BE', fontSize: 16, fontWeight: 'bold' }]}>{day}</Text>
-        ))}
-      </View>
-      {calendar.map((week, index) => (
-        <View key={index} style={styles.week}>
-          {week.map(day => (
-            <TouchableOpacity
-              key={day.format('DD MM YYYY')}
-              style={[
-                styles.day,
-                (day.isSame(startDate, 'day') || day.isSame(endDate, 'day')) ? styles.selectedDay : {},
-                ((startDate != null) && (endDate != null) && day.isAfter(startDate, 'day') && day.isBefore(endDate, 'day')) ? styles.inRangeDay : {}
-              ]}
-              onPress={() => { handleDayPress(day); }}
-            >
-              <Text style={[
-                styles.dayText,
-                (day.isSame(startDate, 'day') || day.isSame(endDate, 'day')) ? styles.selectedDayText : {},
-                day.isSame(moment(), 'day') ? styles.currentDayText : {}
-              ]}>{day.format('D')}</Text>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={() => { setDropdownVisible(true); }} style={styles.monthSelectorButton}>
+          <Text style={styles.monthSelectorText}>Select Date: {currentDate.format('MMMM YYYY')}</Text>
+          <Icon name="arrow-drop-down" size={24} color="black" />
+        </TouchableOpacity>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={dropdownVisible}
+          onRequestClose={() => { setDropdownVisible(false); }}
+        >
+          <View style={styles.modalView}>
+            <ScrollView style={styles.dropdown}>
+              {isSelectingYear
+                ? (
+                <>
+                  <Text style={styles.dropdownLabel}>Select Year</Text>
+                  {Array.from({ length: moment().year() - 1970 + 11 }, (_, i) => moment().year() + 10 - i).map((year, index) => (
+                    <TouchableOpacity key={index} style={styles.dropdownItem} onPress={() => { onYearSelect(year); }}>
+                      <Text>{year}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </>
+                  )
+                : (
+                <>
+                  <Text style={styles.dropdownLabel}>Select Month</Text>
+                  {getMonths().map((month, index) => (
+                    <TouchableOpacity key={index} style={styles.dropdownItem} onPress={() => { onMonthSelect(index); }}>
+                      <Text>{month}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </>
+                  )}
+            </ScrollView>
+            <TouchableOpacity style={styles.closeButton} onPress={() => { setDropdownVisible(false); }}>
+              <Text style={styles.closeButtonText}>CLOSE</Text>
             </TouchableOpacity>
+          </View>
+        </Modal>
+        <View style={styles.weekdays}>
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+            <Text key={day} style={[styles.weekday, { color: '#7BB2BE', fontSize: 16, fontWeight: 'bold' }]}>{day}</Text>
           ))}
         </View>
-      ))}
-      <View style={styles.actionContainer}>
-      <TouchableOpacity style={styles.actionButton} onPress={handleResetSelectedDays}>
-          <Text style={styles.actionText}>CLEAR</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton} onPress={() => { handleShowCalendar(false); }}>
-          <Text style={styles.actionText}>OK</Text>
-        </TouchableOpacity>
+        {calendar.map((week, index) => (
+          <View key={index} style={styles.week}>
+            {week.map(day => (
+              <TouchableOpacity
+                key={day.format('DD MM YYYY')}
+                style={[
+                  styles.day,
+                  (day.isSame(startDate, 'day') || day.isSame(endDate, 'day')) ? styles.selectedDay : {},
+                  ((startDate != null) && (endDate != null) && day.isAfter(startDate, 'day') && day.isBefore(endDate, 'day')) ? styles.inRangeDay : {}
+                ]}
+                onPress={() => { handleDayPress(day); }}
+              >
+                <Text style={[
+                  styles.dayText,
+                  (day.isSame(startDate, 'day') || day.isSame(endDate, 'day')) ? styles.selectedDayText : {},
+                  day.isSame(moment(), 'day') ? styles.currentDayText : {}
+                ]}>{day.format('D')}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
+        <View style={styles.actionContainer}>
+        <TouchableOpacity style={styles.actionButton} onPress={handleResetSelectedDays}>
+            <Text style={styles.actionText}>CLEAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.actionButton} onPress={() => { handleShowCalendar(false); }}>
+            <Text style={styles.actionText}>OK</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
   );
 };
 

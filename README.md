@@ -1,6 +1,6 @@
 # react-native-calendar-range-selector
 
-**react-native-calendar-range-selector** is an npm library for selecting date ranges with a user-friendly calendar interface. It uses `moment.js` and `react-native-vector-icons` to offer a seamless and customizable experience, allowing users to select either two dates (start and end) or a single date. Perfect for booking systems, scheduling apps, and any date-related functionality, this library is easy to integrate and visually appealing, enhancing date input in any React Native project.
+[react-native-calendar-range-selector](https://www.npmjs.com/package/react-native-calendar-range-selector) is an npm library for selecting date ranges with a user-friendly calendar interface. It uses `moment.js` and `react-native-vector-icons` to offer a seamless and customizable experience, allowing users to select either two dates (start and end) or a single date. Perfect for booking systems, scheduling apps, and any date-related functionality, this library is easy to integrate and visually appealing, enhancing date input in any React Native project.
 
 ## Dependencies
 

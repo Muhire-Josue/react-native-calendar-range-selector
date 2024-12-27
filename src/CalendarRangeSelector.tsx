@@ -7,6 +7,7 @@ import styles from './styles';
 interface handleResetSelectedDays {
   handleShowCalendar: (value: boolean) => void
   handleResetSelectedDays: () => void
+  handleOkPress: () => void
   startDate: Moment | null
   endDate: Moment | null
   setStartDate: (day: Moment | null) => void
@@ -19,7 +20,8 @@ const CalendarRangeSelector: React.FC<handleResetSelectedDays> = ({
   endDate,
   setStartDate,
   setEndDate,
-  handleShowCalendar
+  handleShowCalendar,
+  handleOkPress
 }) => {
   const [currentDate, setCurrentDate] = useState<Moment>(moment());
   const [dropdownVisible, setDropdownVisible] = useState<boolean>(false);
@@ -141,7 +143,7 @@ const CalendarRangeSelector: React.FC<handleResetSelectedDays> = ({
         <TouchableOpacity style={styles.actionButton} onPress={handleResetSelectedDays}>
             <Text style={styles.actionText}>CLEAR</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton} onPress={() => { handleShowCalendar(false); }}>
+          <TouchableOpacity style={styles.actionButton} onPress={() => { handleShowCalendar(false); handleOkPress(); }}>
             <Text style={styles.actionText}>OK</Text>
           </TouchableOpacity>
         </View>

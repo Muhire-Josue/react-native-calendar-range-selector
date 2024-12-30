@@ -83,7 +83,7 @@ export default App;
 | setEndDate | `(day: Moment | null) => Function to set the ending date. |
 | handleResetSelectedDays | `() => void` | Function to reset the selected days. |
 | handleShowCalendar | `(value: boolean) => void` | Function to show or hide the calendar. |
-| handleOkPress | `() => void` | Function to handle when the  `Ok` button is clicked|
+| handleOkPress | `() => void` | Function that is called when the  `Ok` button is clicked|
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

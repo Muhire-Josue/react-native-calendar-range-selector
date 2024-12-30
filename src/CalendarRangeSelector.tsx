@@ -133,7 +133,9 @@ const CalendarRangeSelector: React.FC<handleResetSelectedDays> = ({
               <Text style={[
                 styles.dayText,
                 (day.isSame(startDate, 'day') || day.isSame(endDate, 'day')) ? styles.selectedDayText : {},
-                day.isSame(moment(), 'day') ? styles.currentDayText : {}
+                day.isSame(moment(), 'day') ?
+                  (day.isSame(startDate, 'day') || day.isSame(endDate, 'day') ? { color: 'white' } : styles.currentDayText)
+                  : {}
               ]}>{day.format('D')}</Text>
             </TouchableOpacity>
           ))}

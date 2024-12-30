@@ -62,6 +62,7 @@ const App = (): React.ReactNode => {
           setEndDate={setEndDate}
           handleResetSelectedDays={handleResetSelectedDays}
           handleShowCalendar={handleShowCalendar}
+          handleOkPress={handleOkPress}
         />
       )}
     </View>
